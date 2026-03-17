@@ -3,11 +3,14 @@ import dotenv from "dotenv";
 import { connectDB } from "./db/dbconn.js";
 import authRoutes from "./routes/authRoutes.js";
 
+
+import taskRoutes from "./routes/taskRoutes.js";
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use("/", authRoutes);
+app.use("/tasks", taskRoutes);
 
 const PORT = process.env.SRV_PORT || 3000;
 
