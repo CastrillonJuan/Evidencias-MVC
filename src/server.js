@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import { connectDB } from "./db/dbconn.js";
+import teamRoutes from "./routes/teamRoutes.js";
 
 dotenv.config();
 
@@ -14,8 +15,11 @@ app.get("/", (req, res) => {
   res.send("Servidor funcionando");
 });
 
+app.use('/', teamRoutes);
+
 // Iniciar servidor
 app.listen(PORT, async () => {
   console.log(`Server en puerto ${PORT}`);
   await connectDB();
 });
+
