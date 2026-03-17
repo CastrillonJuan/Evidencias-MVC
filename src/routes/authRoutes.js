@@ -1,9 +1,9 @@
-// // Repo
-// import { Router} from "express";
-// // import { validarUser } from "../middleware/harolperrota.js";
-// // import { getUsers, postUsers } from "../controller/userController.js";
+import express from "express";
+import { register, login } from "../controllers/authController.js";
 
-// const router = Router();
-// // router.get("/users", getUsers);
-// // router.post("/users/register", validarUser, postUsers);
-// export default router;
+const router = express.Router();
+
+router.post("/register", register);
+router.post("/login", login);
+
+export default router;
