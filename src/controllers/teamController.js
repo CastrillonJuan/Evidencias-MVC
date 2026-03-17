@@ -11,33 +11,36 @@ export const getTeams = async (req, res, next) => {
 };
 
 export const createTeam = async (req, res, next) => {
-  //   try {
-  //     const { name, created_by } = req.body;
+  try {
+    const { name, created_by } = req.body;
 
-  //     const result = await DBConnection.query(
-  //       TEAMQUERIES.CREATE_TEAM,
-  //       [name, created_by]
-  //     );
+    const result = await DBConnection.query(TEAMQUERIES.CREATE_TEAM, [
+      name,
+      created_by,
+    ]);
 
-  //     res.status(201).json(result.rows[0]);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  console.log("POST funcionando");
-  res.send("OK");
+    console.log(result.rows);
+
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
 };
 
 export const addMembers = async (req, res, next) => {
   try {
     const { teamId } = req.params;
     const { user_id } = req.body;
-    const result = await DBConnection.query(TEAMQUERIES.ADD_MEMBERS, [
-      team_id,
+
+    const result = await DBConnection.query(TEAMQUERIES.ADD_MEMBER, [
+      teamId,
       user_id,
     ]);
 
     res.status(201).json(result.rows[0]);
   } catch (error) {
+    console.error(error);
     next(error);
   }
 };
